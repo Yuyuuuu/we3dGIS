@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cache="http://www.springframework.org/schema/cache" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd"
+	default-lazy-init="true">
+
+	<context:property-placeholder location="classpath*:rm.properties" ignore-resource-not-found="true" ignore-unresolvable="true" />
+	<!--配置自动扫描  -->
+	<context:component-scan base-package="com.bidr">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<context:component-scan base-package="com.bidr.websocket" />
+
+	<!--配置ehcache  -->
+	<bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+		<property name="shared" value="true" />
+	</bean>
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+		<property name="cacheManager" ref="ehCacheManager" />
+	</bean>
+
+	<cache:annotation-driven cache-manager="cacheManager" />
+	    <!-- 定义数据源Bean -->
+    <!-- Druid -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="jdbc:mysql://47.92.158.107:3306/we3dgis?useUnicode=true&amp;characterEncoding=utf8&amp;allowMultiQueries=true" />
+        <property name="username" value="root" />
+        <property name="password" value="bidr2018" />
+    </bean>
+
+    <!-- 注册SqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描mappers.xml文件 -->
+        <property name="mapperLocations" value="classpath:com/bidr/mapper/*.xml" />
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    </bean>
+    
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.bidr.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+
+	<!-- 配置freeMarker的模板路径 -->  
+    <bean id="freemarkerConfig"  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">  
+        <property name="templateLoaderPath">  
+            <value>/template/</value>  
+        </property>  
+        <property name="freemarkerVariables">  
+            <map>  
+                <entry key="xml_escape" value-ref="fmXmlEscape" />  
+                <entry key="base" value="#{servletContext.contextPath}" />
+            </map>  
+        </property>  
+        <property name="defaultEncoding">  
+            <value>utf-8</value>  
+        </property>  
+        <property name="freemarkerSettings">  
+            <props>  
+                <prop key="template_update_delay">0</prop>  
+            </props>  
+        </property>  
+    </bean>  
+    <!-- 注入邮箱邮箱 -->
+     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${rm.mail.host}" />
+        <property name="port" value="${rm.mail.port}" />
+        <property name="username" value="${rm.mail.username}" />
+        <property name="password" value="${rm.mail.licensekey} "/>
+ 
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+   
+ 
+
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+    
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver" />
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+</beans>

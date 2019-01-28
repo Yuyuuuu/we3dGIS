@@ -1,0 +1,20 @@
+body {
+    padding: 5px;
+    text-align: center;
+}
+
+.talbe_style {
+    padding: 5px;
+    width: 95%;
+    border: 0;
+    font-size: 13px;
+}
+
+.talbe_style tr td {
+    padding: 5px;
+    text-align: left;
+}
+
+.nametd {
+    width: 40%;
+}

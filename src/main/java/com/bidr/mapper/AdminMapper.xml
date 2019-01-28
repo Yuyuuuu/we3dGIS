@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bidr.mapper.AdminMapper">
+  
+  <resultMap id="BaseResultMap" type="com.bidr.entity.Admin">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="create_date" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modify_date" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="is_enabled" jdbcType="BIT" property="is_enabled" />
+    <result column="is_locked" jdbcType="BIT" property="is_locked" />
+    <result column="lock_key" jdbcType="VARCHAR" property="lock_key" />
+    <result column="locked_date" jdbcType="TIMESTAMP" property="locked_date" />
+    <result column="login_date" jdbcType="TIMESTAMP" property="login_date" />
+    <result column="login_failure_count" jdbcType="INTEGER" property="login_failure_count" />
+    <result column="login_ip" jdbcType="VARCHAR" property="login_ip" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_date, modify_date, version, department, email, is_enabled, is_locked, 
+    lock_key, locked_date, login_date, login_failure_count, login_ip, name, password, 
+    username
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_admin
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="findAuthorities"  parameterType="java.lang.Long" resultType="java.lang.String">
+    select r.authorities
+    from t_admin_role ar,t_role r
+    where ar.roles=r.id
+    and ar.admins=${id}
+  </select>
+  
+   <select id="checkUsername" parameterType="java.lang.String" resultType="java.lang.Integer">
+     select count(*) from t_admin where username=#{username,jdbcType=VARCHAR}
+  </select>
+   <select id="selectAdmin" parameterType="java.lang.Long" resultType="com.bidr.entity.Admin">
+    select 
+    <include refid="Base_Column_List" />,
+    (select GROUP_CONCAT(roles) from t_admin_role where admins=#{id,jdbcType=BIGINT}) roles
+    from t_admin
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="findByUsername" parameterType="java.lang.String" resultType="com.bidr.entity.Admin">
+    select 
+    <include refid="Base_Column_List" />,
+    (select GROUP_CONCAT(roles) from t_admin_role where admins=#{id,jdbcType=BIGINT}) roles
+    from t_admin
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+   <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_admin
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  	delete from t_admin_role where admins=#{id,jdbcType=BIGINT};
+    delete from t_admin where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.bidr.entity.Admin" useGeneratedKeys="true">
+    insert into t_admin (create_date, modify_date, 
+      version, department, email, 
+      is_enabled, is_locked, lock_key, 
+      locked_date, login_date, login_failure_count, 
+      login_ip, name, password, 
+      username)
+    values ( #{create_date,jdbcType=TIMESTAMP}, #{modify_date,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT}, #{department,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{is_enabled,jdbcType=BIT}, #{is_locked,jdbcType=BIT}, #{lock_key,jdbcType=VARCHAR}, 
+      #{locked_date,jdbcType=TIMESTAMP}, #{login_date,jdbcType=TIMESTAMP}, #{login_failure_count,jdbcType=INTEGER}, 
+      #{login_ip,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR})
+      <!--
+     &lt;selectKey keyProperty="id" order="AFTER" resultType="int"&gt;
+                   SELECT LAST_INSERT_ID()
+      &lt;/selectKey&gt;-->
+  </insert>
+  <insert id="insertAdminRole" parameterType="java.util.Map">
+  		 insert into t_admin_role(admins,roles) values
+  		 <foreach collection="roles.split(',')" index="index" item="role" separator=",">
+  		 	(${admins},${role})
+  		 </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.bidr.entity.Admin">
+    insert into t_admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="create_date != null">
+        create_date,
+      </if>
+      <if test="modify_date != null">
+        modify_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="is_enabled != null">
+        is_enabled,
+      </if>
+      <if test="is_locked != null">
+        is_locked,
+      </if>
+      <if test="lock_key != null">
+        lock_key,
+      </if>
+      <if test="locked_date != null">
+        locked_date,
+      </if>
+      <if test="login_date != null">
+        login_date,
+      </if>
+      <if test="login_failure_count != null">
+        login_failure_count,
+      </if>
+      <if test="login_ip != null">
+        login_ip,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="create_date != null">
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_date != null">
+        #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="is_enabled != null">
+        #{is_enabled,jdbcType=BIT},
+      </if>
+      <if test="is_locked != null">
+        #{is_locked,jdbcType=BIT},
+      </if>
+      <if test="lock_key != null">
+        #{lock_key,jdbcType=VARCHAR},
+      </if>
+      <if test="locked_date != null">
+        #{locked_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="login_date != null">
+        #{login_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="login_failure_count != null">
+        #{login_failure_count,jdbcType=INTEGER},
+      </if>
+      <if test="login_ip != null">
+        #{login_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bidr.entity.Admin">
+    update t_admin
+    <set>
+      <if test="create_date != null">
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_date != null">
+        modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="is_enabled != null">
+        is_enabled = #{is_enabled,jdbcType=BIT},
+      </if>
+      <if test="is_locked != null">
+        is_locked = #{is_locked,jdbcType=BIT},
+      </if>
+      <if test="lock_key != null">
+        lock_key = #{lock_key,jdbcType=VARCHAR},
+      </if>
+      <if test="locked_date != null">
+        locked_date = #{locked_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="login_date != null">
+        login_date = #{login_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="login_failure_count != null">
+        login_failure_count = #{login_failure_count,jdbcType=INTEGER},
+      </if>
+      <if test="login_ip != null">
+        login_ip = #{login_ip,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bidr.entity.Admin">
+    update t_admin
+    set create_date = #{create_date,jdbcType=TIMESTAMP},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIGINT},
+      department = #{department,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      is_enabled = #{is_enabled,jdbcType=BIT},
+      is_locked = #{is_locked,jdbcType=BIT},
+      lock_key = #{lock_key,jdbcType=VARCHAR},
+      locked_date = #{locked_date,jdbcType=TIMESTAMP},
+      login_date = #{login_date,jdbcType=TIMESTAMP},
+      login_failure_count = #{login_failure_count,jdbcType=INTEGER},
+      login_ip = #{login_ip,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateAdminRole" parameterType="com.bidr.entity.Admin">
+    	delete from t_admin_role where admins = #{id,jdbcType=BIGINT};
+    	insert into t_admin_role(admins,roles) values
+  		 <foreach collection="roles.split(',')" index="index" item="role" separator=",">
+  		 	(#{id,jdbcType=BIGINT},${role})
+  		 </foreach>
+  </update>
+  
+  <select id="selectAllFileCount"  resultType="java.util.Map">
+  select 
+  
+  (select count(*)  from t_design_resource_info) designCount,
+  (select count(*)  from t_geology_resource_info) geologyCount,
+  (select count(*)  from t_monitor_resource_info) monitorCount ,
+  (select count(*)  from t_progress_resource_info) progressCount, 
+  (select count(*)  from t_photo) photoCount,
+  
+  (select round(ifnull(sum(size),0)/1024/1024,2) from t_design_resource_info) designSize,
+  (select round(ifnull(sum(size),0)/1024/1024,2)  from t_geology_resource_info) geologySize,
+  (select round(ifnull(sum(size),0)/1024/1024,2)  from t_monitor_resource_info) monitorSize ,
+  (select round(ifnull(sum(size),0)/1024/1024,2)  from t_progress_resource_info) progressSize, 
+  (select round(ifnull(sum(size),0)/1024/1024,2)  from t_photo) photoSize,
+  
+  (select count(*)  from t_design_resource_info  where to_days(create_date) = to_days(now())) designNowCount,
+  (select count(*)  from t_geology_resource_info where to_days(create_date) = to_days(now())) geologyNowCount,
+  (select count(*)  from t_monitor_resource_info where to_days(create_date) = to_days(now())) monitorNowCount ,
+  (select count(*)  from t_progress_resource_info where to_days(create_date) = to_days(now())) progressNowCount, 
+  (select count(*)  from t_photo where to_days(create_date) = to_days(now())) photoNowCount
+  
+  from dual
+  </select>
+  <select id="selectAllInfo" resultType="java.util.Map">
+  	select allinfo.* from 
+(
+select uuid,group_concat(info.oriname) oriname,group_concat(info.path) path,info.create_date,admin.username,admin.name from t_design_resource_info info,t_admin admin where info.upload_person=admin.id group by info.uuid
+union
+select uuid,group_concat(info.oriname) oriname,group_concat(info.path) path,info.create_date,admin.username,admin.name from t_geology_resource_info info,t_admin admin where info.upload_person=admin.id group by info.uuid
+union
+select uuid,group_concat(info.oriname) oriname,group_concat(info.path) path,info.create_date,admin.username,admin.name from t_monitor_resource_info info,t_admin admin where info.upload_person=admin.id group by info.uuid
+union
+select uuid,group_concat(info.oriname) oriname,group_concat(info.path) path,info.create_date,admin.username,admin.name from t_progress_resource_info info,t_admin admin where info.upload_person=admin.id group by info.uuid
+union
+select uuid,group_concat(info.oriname) oriname,group_concat(info.path) path,info.create_date,admin.username,admin.name from t_photo info,t_admin admin where info.upload_person=admin.id group by info.uuid
+) allinfo
+where allinfo.path is not null
+order by allinfo.create_date desc 
+limit 0,5
+
+  </select>
+</mapper>

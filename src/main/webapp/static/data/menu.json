@@ -1,0 +1,242 @@
+﻿﻿﻿﻿showData{
+    "defpage": "../map/index.html",
+    "menu": [
+        {
+            "name": "首页",
+            "icon": "fa fa-home",
+            "calback": "mars3d.widget.disableAll()"
+        },
+        {
+            "name": "信息展示",
+            "icon": "fa fa-eye",
+            "children": [
+                {
+                    "name": "企业点",
+                    "icon": "fa fa-university",
+                    "children": [
+                        {
+                            "name": "企业分布",
+                            "uri": "/we3dGIS/static/map/widgetsTS/qyPoint/widget.js"
+                        },
+
+                        {
+                            "name": "图层数据查询",
+                            "uri": "/we3dGIS/static/map/widgetsTS/queryByWhere/widget.js"
+                        }
+                    ]
+                },
+                {
+                    "name": "动态数据",
+                    "icon": "fa fa-ship",
+                    "children": [
+                        {
+                            "name": "飞行编队",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=306011",
+                            "layerId": 306011
+                        },
+                        {
+                            "name": "船舶编队",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=306012",
+                            "layerId": 306012
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "三维模型",
+            "icon": "fa fa-building",
+            "children": [
+                {
+                    "name": "城市建筑",
+                    "icon": "fa fa-folder-o",
+                    "children": [
+                        {
+                            "name": "合肥市区",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=204011",
+                            "layerId": 204011
+                        },
+                        {
+                            "name": "上海市区",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=204012",
+                            "layerId": 204012
+                        }
+                    ]
+                },
+                {
+                    "name": "人工模型",
+                    "icon": "fa fa-folder-o",
+                    "children": [
+                        {
+                            "name": "化工厂",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=202021",
+                            "layerId": 202021
+                        },
+                        
+                        {
+                            "name": "水利闸门",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=20203011",
+                            "layerId": 20203011
+                        },
+                        {
+                            "name": "BIM建筑",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=205087",
+                            "layerId": 205087
+                        }
+                    ]
+                },
+
+                {
+                    "name": "倾斜摄影",
+                    "icon": "fa fa-folder-o",
+                    "children": [
+                        {
+                            "name": "厂房",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=203011",
+                            "layerId": 203011
+                        },
+                         {
+                            "name": "厂房单体示例",
+                            "uri": "/we3dGIS/static/map/widgetsTS/dantihua/widget.js",
+                            "autoDisable": false
+                        },
+                        {
+                            "name": "县城社区",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=203013",
+                            "layerId": 203013
+                        },
+                        {
+                            "name": "工业园区",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=203012",
+                            "layerId": 203012
+                        }
+                        
+                    ]
+                },
+                
+                {
+                    "name": "管网",
+                    "icon": "fa fa-random",
+                    "children": [
+                        {
+                            "name": "矢量管网",
+                            "uri": "/we3dGIS/static/map/widgetsTS/pipeline/widget.js"
+                        },
+                        {
+                            "name": "模型管网",
+                            "uri": "/we3dGIS/static/map/widgets/showLayer/widget.js?type=205010",
+                            "layerId": 205010
+                        }
+                    ]
+                } 
+            ]
+        },
+        {
+            "name": "数据分析",
+            "icon": "fa fa-area-chart",
+            "children": [
+                {
+                    "name": "综合分析",
+                    "icon": "fa fa-folder-o",
+                    "children": [
+                        {
+                            "name": "事故模拟",
+                            "uri": "/we3dGIS/static/map/widgetsTS/sgmn/widget.js"
+                        },
+                         {
+                            "name": "淹没分析",
+                            "uri": "/we3dGIS/static/map/widgetsTS/flood/widget.js"
+                        },
+                        {
+                            "name": "模型裁剪",
+                            "uri": "/we3dGIS/static/map/widgetsTS/clip/widget.js"
+                        } ,
+                        {
+                            "name": "地下开挖",
+                            "uri": "/we3dGIS/static/map/widgetsTS/digTerrain/widget.js"
+                        }    
+                    ]
+                },
+                {
+                    "name": "专项数据",
+                    "icon": "fa fa-folder-o",
+                    "children": [
+                        {
+                            "name": "含水层",
+                            "uri": "/we3dGIS/static/map/widgetsTS/ts_showView/widget1.js"
+                        },
+                        {
+                            "name": "经济特区",
+                            "uri": "/we3dGIS/static/map/widgetsTS/ts_showView/widget2.js"
+                        },
+                        {
+                            "name": "雨量流量监测",
+                            "uri": "/we3dGIS/static/map/widgetsTS/ts_showView/widget3.js"
+                        },
+
+                        {
+                            "name": "区域实际灌溉",
+                            "uri": "/we3dGIS/static/map/widgetsTS/ts_showView/widget4.js"
+                        },
+
+                        {
+                            "name": "大型洪水情况",
+                            "uri": "/we3dGIS/static/map/widgetsTS/ts_showView/widget5.js"
+                        },
+
+                        {
+                            "name": "主要城市水域",
+                            "uri": "/we3dGIS/static/map/widgetsTS/ts_showView/widget6.js"
+                        }
+                    ]
+                }
+
+            ]
+        },
+        {
+            "name": "综合态势",
+            "icon": "fa fa-magic",
+            "children": [
+                {
+                    "name": "热力图",
+                    "icon": "fa fa-image",
+                    "uri": "/we3dGIS/static/map/widgetsTS/showHeat/widget.js"
+                },
+                {
+                    "name": "区域分布",
+                    "icon": "fa fa-area-chart",
+                    "uri": "/we3dGIS/static/map/widgetsTS/showPolygon/widget.js"
+                },
+                {
+                    "name": "动态波纹点",
+                    "icon": "fa fa-bullseye",
+                    "uri": "/we3dGIS/static/map/widgetsTS/newGeometry/elliposid.js"
+                },
+                {
+                    "name": "动态线",
+                    "icon": "fa fa-ticket",
+                    "uri": "/we3dGIS/static/map/widgetsTS/newGeometry/polyline.js"
+                }, 
+                {
+                    "name": "动态围墙",
+                    "icon": "fa fa-empire",
+                    "uri": "/we3dGIS/static/map/widgetsTS/newGeometry/wall.js"
+                },
+                
+                {
+                    "name": "全省经济指标",
+                    "icon": "fa fa-dashboard",
+                    "uri": "/we3dGIS/static/map/widgetsTS/showEcharts/sandian1.js"
+                }
+            ]
+        }
+
+
+
+
+
+
+
+    ]
+
+}

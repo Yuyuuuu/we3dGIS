@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bidr.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.bidr.entity.Role">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="create_date" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modify_date" />
+    <result column="version" jdbcType="BIGINT" property="version" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="is_system" jdbcType="BIT" property="is_system" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bidr.entity.Role">
+    <result column="authorities" jdbcType="LONGVARCHAR" property="authorities" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_date, modify_date, version, description, is_system, name
+  </sql>
+  <sql id="Blob_Column_List">
+    authorities
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="findAll" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_role
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.bidr.entity.Role">
+    insert into t_role (id, create_date, modify_date, 
+      version, description, is_system, 
+      name, authorities)
+    values (#{id,jdbcType=BIGINT}, #{create_date,jdbcType=TIMESTAMP}, #{modify_date,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{is_system,jdbcType=BIT}, 
+      #{name,jdbcType=VARCHAR}, #{authorities,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bidr.entity.Role">
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="create_date != null">
+        create_date,
+      </if>
+      <if test="modify_date != null">
+        modify_date,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="is_system != null">
+        is_system,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="authorities != null">
+        authorities,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="create_date != null">
+        #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_date != null">
+        #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="is_system != null">
+        #{is_system,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="authorities != null">
+        #{authorities,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bidr.entity.Role">
+    update t_role
+    <set>
+      <if test="create_date != null">
+        create_date = #{create_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modify_date != null">
+        modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="is_system != null">
+        is_system = #{is_system,jdbcType=BIT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="authorities != null">
+        authorities = #{authorities,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bidr.entity.Role">
+    update t_role
+    set create_date = #{create_date,jdbcType=TIMESTAMP},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      is_system = #{is_system,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR},
+      authorities = #{authorities,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bidr.entity.Role">
+    update t_role
+    set create_date = #{create_date,jdbcType=TIMESTAMP},
+      modify_date = #{modify_date,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      is_system = #{is_system,jdbcType=BIT},
+      name = #{name,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

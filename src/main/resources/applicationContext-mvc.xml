@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd"
+	default-lazy-init="true">
+
+
+	<context:component-scan base-package="com.bidr" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	
+<!-- 注册MVC注解驱动 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<ref bean="messageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+  <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>  
+        <property name="contentType" value="text/html; charset=utf-8"/>  
+        <property name="cache" value="false" />  
+        <property name="suffix" value=".ftl" />  
+        <property name="order" value="0"/>
+        <property name="requestContextAttribute" value="request"/>
+    </bean>  
+	
+	  <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+ 
+	<bean id="messageConverter"
+		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+</beans>
