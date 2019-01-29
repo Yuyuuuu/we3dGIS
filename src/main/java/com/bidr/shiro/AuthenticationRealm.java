@@ -44,7 +44,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
 		String password = new String(authenticationToken.getPassword());
 		String ip = authenticationToken.getHost();
 		//判断单用户登录
-	  /*  Collection<Session> sessions = sessionDao.getActiveSessions();
+	   Collection<Session> sessions = sessionDao.getActiveSessions();
 	    for (Session session : sessions) {
 	    	Object o = session.getAttribute("username");
 	    	if(o!=null){
@@ -52,7 +52,7 @@ public class AuthenticationRealm extends AuthorizingRealm {
 	    			throw new KickOutException();
 	    		}
 	    	}
-		}*/
+		}
 		
 		if (username != null && password != null) {
 			Admin admin = adminService.findByUsername(username);

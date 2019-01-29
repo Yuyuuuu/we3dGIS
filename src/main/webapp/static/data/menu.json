@@ -1,5 +1,5 @@
-﻿﻿﻿﻿showData{
-    "defpage": "../map/index.html",
+﻿{
+    "defpage": "/we3dGIS/map/index.jhtml",
     "menu": [
         {
             "name": "首页",

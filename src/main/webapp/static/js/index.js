@@ -28,25 +28,24 @@ function initView() {
         });
     });
 
-   /* rightFrame = document.getElementById('rightFrame');
+    rightFrame = document.getElementById('rightFrame');
     if (rightFrame.attachEvent) {
         rightFrame.attachEvent("onload", rightFrame_onload);
     } else {
         rightFrame.onload = rightFrame_onload;
-    }*/
+    }
 
     //加载菜单
     $.ajax({
         url: '../static/data/menu.json',
-        type: 'get',
-        dataType: "jsonp",
+        type: 'post',
+        dataType: "json",
         jsonpCallback: "showData",
         cache: false,
         beforeSend: function () {
             $('#navLoadEle').show();
         },
         success: function (json) {
-        	alert(json);
             $('#navLoadEle').hide(); // loading
 
             defpage = json.defpage;

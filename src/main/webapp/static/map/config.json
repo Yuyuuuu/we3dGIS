@@ -612,12 +612,12 @@
                 "offset": { "z": -4 },
                 "center": { "y": 40.414276, "x": 115.458072, "z": 1235, "heading": 194.6, "pitch": -48.8, "roll": 359.9 }
             },
-{
+			{
                 "id": 203012,
                 "pid": 2030,
                 "type": "3dtiles",
                 "name": "bidr",
-                "url": "http://60.28.38.245:8082/Scene/Production_1.json",
+                "url": "/we3dGIS/static/data/geojson/Production_1.json",
                 "offset": { "z": -75 },
                 "center": { "y": 39.047079, "x": 117.239843, "z": 600, "heading": 356, "pitch": -40, "roll": 360 },
                 "visible": true
@@ -664,39 +664,39 @@
         "widgetsAtStart": [
             {
                 "name": "右上角工具栏",
-                "uri": "widgets/toolBarRight/widget.js",
+                "uri": "/we3dGIS/static/map/widgets/toolBarRight/widget.js",
                 "data": [
                     { "name": "漫游", "icon": "fa fa-globe", "onclick": "mars3d.widget.disableAll()", "visible": false },
-                    { "name": "底图", "icon": "fa fa-map", "widget": "widgets/manageBasemaps/widget.js", "visible": true },
-                    { "name": "图层", "icon": "fa fa-tasks", "widget": "widgets/manageLayers/widget.js" },
+                    { "name": "底图", "icon": "fa fa-map", "widget": "/we3dGIS/static/map/widgets/manageBasemaps/widget.js", "visible": true },
+                    { "name": "图层", "icon": "fa fa-tasks", "widget": "/we3dGIS/static/map/widgets/manageLayers/widget.js" },
                     {
                         "name": "工具",
                         "icon": "fa fa-cubes",
                         "children": [
-                            { "name": "图上量算", "icon": "fa fa fa-calculator", "widget": "widgets/measure/widget.js" },
+                            { "name": "图上量算", "icon": "fa fa fa-calculator", "widget": "/we3dGIS/static/map/widgets/measure/widget.js" },
 
-                            { "name": "坐标定位", "icon": "fa fa-map-pin", "widget": "widgets/centerXY/widget.js" },
-                            { "name": "地区导航", "icon": "fa fa-paper-plane", "widget": "widgets/navXZQH/widget.js" },
-                            { "name": "我的标记", "icon": "fa fa-edit", "widget": "widgets/addmarker/widget.js" },
-                            { "name": "视角书签", "icon": "fa fa-tags", "widget": "widgets/bookmark/widget.js" },
+                            { "name": "坐标定位", "icon": "fa fa-map-pin", "widget": "/we3dGIS/static/map/widgets/centerXY/widget.js" },
+                            { "name": "地区导航", "icon": "fa fa-paper-plane", "widget": "/we3dGIS/static/map/widgets/navXZQH/widget.js" },
+                            { "name": "我的标记", "icon": "fa fa-edit", "widget": "/we3dGIS/static/map/widgets/addmarker/widget.js" },
+                            { "name": "视角书签", "icon": "fa fa-tags", "widget": "/we3dGIS/static/map/widgets/bookmark/widget.js" },
 
-                            { "name": "分屏对比", "icon": "fa fa-window-restore", "widget": "widgets/mapCompare/widget.js" },
-                            { "name": "卷帘对比", "icon": "fa fa-columns", "widget": "widgets/mapSwipe/widget.js" },
+                            { "name": "分屏对比", "icon": "fa fa-window-restore", "widget": "/we3dGIS/static/map/widgets/mapCompare/widget.js" },
+                            { "name": "卷帘对比", "icon": "fa fa-columns", "widget": "/we3dGIS/static/map/widgets/mapSwipe/widget.js" },
 
-                            { "name": "图上标绘", "icon": "fa fa-object-group", "widget": "widgets/plot/widget.js" },
-                            { "name": "飞行漫游", "icon": "fa fa-send-o", "widget": "widgets/roamLine/widget.js" },
-                            { "name": "粒子效果", "icon": "fa fa-free-code-camp", "widget": "widgets/particalSystem/widget.js" },
-                            { "name": "百度街景", "icon": "fa fa-street-view", "widget": "widgets/streetscape/widget.js" },
-                            { "name": "地图打印", "icon": "fa fa-print", "widget": "widgets/print/widget.js" },
-                            { "name": "分享地图", "icon": "fa fa-share", "widget": "widgets/shareUrl/widget.js" },
-                            { "name": "参数设置", "icon": "fa fa-cog", "widget": "widgets/setting/widget.js" }
+                            { "name": "图上标绘", "icon": "fa fa-object-group", "widget": "/we3dGIS/static/map/widgets/plot/widget.js" },
+                            { "name": "飞行漫游", "icon": "fa fa-send-o", "widget": "/we3dGIS/static/map/widgets/roamLine/widget.js" },
+                            { "name": "粒子效果", "icon": "fa fa-free-code-camp", "widget": "/we3dGIS/static/map/widgets/particalSystem/widget.js" },
+                            { "name": "百度街景", "icon": "fa fa-street-view", "widget": "/we3dGIS/static/map/widgets/streetscape/widget.js" },
+                            { "name": "地图打印", "icon": "fa fa-print", "widget": "/we3dGIS/static/map/widgets/print/widget.js" },
+                            { "name": "分享地图", "icon": "fa fa-share", "widget": "/we3dGIS/static/map/widgets/shareUrl/widget.js" },
+                            { "name": "参数设置", "icon": "fa fa-cog", "widget": "/we3dGIS/static/map/widgets/setting/widget.js" }
                         ]
                     }
                 ] 
             },
             {
                 "name": "poi查询",
-                "uri": "widgets/queryBaiduPOI/widget.js"
+                "uri": "/we3dGIS/static/map/widgets/queryBaiduPOI/widget.js"
             }            
         ],
         "widgets": [
@@ -706,7 +706,7 @@
                 "children": [
                     {
                         "name": "iframe弹窗模板",
-                        "uri": "widgets/_example/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/_example/widget.js",
                         "windowOptions": {
                             "width": 300,
                             "height": 400,
@@ -721,11 +721,11 @@
                     },
                     {
                         "name": "div弹窗模板",
-                        "uri": "widgets/_example_divwin/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/_example_divwin/widget.js"
                     },
                     {
                         "name": "append模板",
-                        "uri": "widgets/_example_append/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/_example_append/widget.js"
                     }
                 ]
             },
@@ -737,14 +737,14 @@
                     {
                         "id": "manageBasemaps",
                         "name": "地图切换",
-                        "uri": "widgets/manageBasemaps/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/manageBasemaps/widget.js",
                         "group": "forlayer",
                         "autoDisable": false,
                         "disableOhter": false
                     },
                     {
                         "name": "图层管理",
-                        "uri": "widgets/manageLayers/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/manageLayers/widget.js",
                         "group": "forlayer",
                         "windowOptions": {
                             "position": {
@@ -758,7 +758,7 @@
                     },
                     {
                         "name": "图上量算",
-                        "uri": "widgets/measure/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/measure/widget.js",
                         "windowOptions": {
                             "position": {
                                 "bottom": 30,
@@ -768,7 +768,7 @@
                     },
                     {
                         "name": "剖面分析",
-                        "uri": "widgets/section/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/section/widget.js",
                         "windowOptions": {
                             "position": {
                                 "bottom": 30,
@@ -778,7 +778,7 @@
                     },
                     {
                         "name": "剖面分析图表",
-                        "uri": "widgets/sectionChars/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/sectionChars/widget.js",
                         "windowOptions": {
                             "noTitle": true,
                             "position": {
@@ -791,23 +791,23 @@
                     },
                     {
                         "name": "视角书签",
-                        "uri": "widgets/bookmark/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/bookmark/widget.js"
                     },
                     {
                         "name": "坐标定位",
-                        "uri": "widgets/centerXY/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/centerXY/widget.js"
                     },
                     {
                         "name": "标记",
-                        "uri": "widgets/addmarker/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/addmarker/widget.js"
                     },
                     {
                         "name": "地区导航",
-                        "uri": "widgets/navXZQH/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/navXZQH/widget.js"
                     },
                     {
                         "name": "漫游路线设置",
-                        "uri": "widgets/roamLine/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/roamLine/widget.js",
                         "windowOptions": {
                             "position": {
                                 "top": 45,
@@ -818,7 +818,7 @@
                     },
                     {
                         "name": "漫游路线",
-                        "uri": "widgets/roamFly/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/roamFly/widget.js",
                         "windowOptions": {
                             "position": {
                                 "bottom": 60,
@@ -828,7 +828,7 @@
                     },
                     {
                         "name": "路线剖面",
-                        "uri": "widgets/roamChars/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/roamChars/widget.js",
                         "windowOptions": {
                             "noTitle": true,
                             "position": {
@@ -841,27 +841,27 @@
                     },
                     {
                         "name": "双屏对比",
-                        "uri": "widgets/mapCompare/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/mapCompare/widget.js",
                         "autoDisable": false,
                         "disableOhter": false
                     },
                     {
                         "name": "卷帘对比",
-                        "uri": "widgets/mapSwipe/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/mapSwipe/widget.js",
                         "autoDisable": false,
                         "disableOhter": false
                     },
                     {
                         "name": "粒子效果",
-                        "uri": "widgets/particalSystem/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/particalSystem/widget.js"
                     },
                     {
                         "name": "街景",
-                        "uri": "widgets/streetscape/widget.js"
+                        "uri": "/we3dGIS/static/map/widgets/streetscape/widget.js"
                     },
                     {
                         "name": "标绘",
-                        "uri": "widgets/plot/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/plot/widget.js",
                         "windowOptions": {
                             "position": {
                                 "top": 45,
@@ -873,13 +873,13 @@
                     },
                     {
                         "name": "打印",
-                        "uri": "widgets/print/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/print/widget.js",
                         "autoDisable": false,
                         "disableOhter": false
                     },
                     {
                         "name": "分享当前地图位置",
-                        "uri": "widgets/shareUrl/widget.js",
+                        "uri": "/we3dGIS/static/map/widgets/shareUrl/widget.js",
                         "windowOptions": {
                             "position": {
                                 "top": 1,
@@ -896,13 +896,13 @@
                 "children": [
                     {
                         "name": "企业-地图点",
-                        "uri": "widgetsTS/qyPoint/widget.js",
+                        "uri": "/we3dGIS/static/map/widgetsTS/qyPoint/widget.js",
                         "autoDisable": false,
                         "disableOhter": false
                     },
                     {
                         "name": "企业详情",
-                        "uri": "widgetsTS/qyDetailsView/widget.js",
+                        "uri": "/we3dGIS/static/map/widgetsTS/qyDetailsView/widget.js",
                         "windowOptions": {
                             "skin": "layer-mars-dialog2",
                             "position": {
@@ -916,7 +916,7 @@
                     },
                     {
                         "name": "企业视频监控",
-                        "uri": "widgetsTS/qyVideo/widget.js",
+                        "uri": "/we3dGIS/static/map/widgetsTS/qyVideo/widget.js",
                         "windowOptions": {
                             "skin": "layer-mars-dialog2",
                             "position": {
@@ -930,7 +930,7 @@
                     },
                     {
                         "name": "企业查询",
-                        "uri": "widgetsTS/qyListView/widget.js",
+                        "uri": "/we3dGIS/static/map/widgetsTS/qyListView/widget.js",
                         "windowOptions": {
                             "skin": "layer-mars-dialog2",
                             "position": {
@@ -942,7 +942,7 @@
                     },
                     {
                         "name": "企业统计图表",
-                        "uri": "widgetsTS/qyCharts/widget.js"
+                        "uri": "/we3dGIS/static/map/widgetsTS/qyCharts/widget.js"
                     }
                 ]
             }

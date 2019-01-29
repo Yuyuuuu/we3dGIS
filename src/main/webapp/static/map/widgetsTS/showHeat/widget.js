@@ -3,8 +3,8 @@
 mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     options: {
         resources: [
-            '../lib/CesiumPlugins/heatmap/heatmap.min.js',
-            '../lib/CesiumPlugins/heatmap/HeatmapImageryProvider.js',
+            '../static/lib/CesiumPlugins/heatmap/heatmap.min.js',
+            '../static/lib/CesiumPlugins/heatmap/HeatmapImageryProvider.js',
         ],
     },
     //初始化[仅执行1次]
