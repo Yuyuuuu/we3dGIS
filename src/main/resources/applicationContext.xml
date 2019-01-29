@@ -97,5 +97,5 @@
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver" />
 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-
+	<import resource="application-mongo.xml"/>
 </beans>
