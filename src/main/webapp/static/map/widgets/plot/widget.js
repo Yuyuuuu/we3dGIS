@@ -315,22 +315,17 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
 
         //服务端存储
-        //var json = this.drawControl.toGeoJSON(entity); 
-        //sendAjax({
-        //    url: '/kjAirspace/save',
-        //    data: {
-        //        id: json.properties.attr.id,
-        //        name: json.properties.attr.name,
-        //        remark: json.properties.attr.remark,
-        //        type: json.properties.type,
-        //        coordinates: JSON.stringify(json.geometry),
-        //        properties: JSON.stringify(json.properties)
-        //    },
-        //    type: 'post',
-        //    success: function (data) {
-        //        entity._attribute.attr.id = data;
-        //    }
-        //});
+        var json = this.drawControl.toGeoJSON(entity); 
+        sendAjax({
+            url: '/we3dGIS/map/plot/savePlot.jhtml',
+            data: JSON.stringify(this.getGeoJson()),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: 'post',
+           success: function (data) {
+                entity._attribute.attr.id = data;
+            }
+        });
 
     },
 

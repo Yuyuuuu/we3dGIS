@@ -124,14 +124,15 @@ var addmarkerWidget = mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
         viewer.mars.popup.close();
         this.viewWindow.refMarkerList();
-
-        //var that = this;
-        //sendAjax({
-        //    url: 'kjCustomPoint/del/' + id,
-        //    type: 'get',
-        //    success: function (id) { 
-        //    }
-        //});
+        //后台mongodb删除数据
+         var that = this;
+        sendAjax({
+            url: '/we3dGIS/map/marker/delete/' + id+'.jhtml',
+            type: 'get',
+            success: function (id) { 
+            	console.log("删除成功==="+id);
+            }
+        });
 
         //本地存储
         var storagedata = this.getJsonData();
@@ -187,7 +188,14 @@ var addmarkerWidget = mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
         if (this.viewWindow)
             this.viewWindow.refMarkerList();
-
+        //服务器存储
+        sendAjax({
+            url: '/we3dGIS/map/marker/deleteAll.jhtml',
+            type: 'get',
+            success: function () { 
+            	console.log("全部删除成功===");
+            }
+        });
         //本地存储
         haoutil.storage.del(this.storageName);
     },
@@ -286,14 +294,14 @@ var addmarkerWidget = mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
 
         //读取服务端存储
-        //var that = this; 
-        //sendAjax({
-        //    url: '/kjCustomPoint/getAll',
-        //    type: 'get',
-        //    success: function (arr) {
-        //
-        //    }
-        //});
+        var that = this; 
+        sendAjax({
+            url: '/we3dGIS/map/marker/queryAll.jhtml',
+            type: 'get',
+            success: function (arr) {
+            	console.log("服务器查询数据"+arr);
+            }
+        });
 
     },
     saveEntity: function (entity, endfun) {
@@ -303,26 +311,28 @@ var addmarkerWidget = mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         haoutil.storage.add(this.storageName, storagedata);
 
         //服务端存储
-        //var attr = entity.attribute.attr;
-        //var coord = mars3d.draw.attr.billboard.getCoordinates(entity);
-        //var that = this;
-        //sendAjax({
-        //    url: '/kjCustomPoint/save',
-        //    data: {
-        //        id: attr.id == "0" ? "" : attr.id,
-        //        name: attr.name,
-        //        remark: attr.remark,
-        //        x: coord[0][0],
-        //        y: coord[0][1],
-        //        z: coord[0][2]
-        //    },
-        //    type: 'post',
-        //    success: function (data) {
-        //        entity.attribute.attr.id = data;
-        //        if (endfun) endfun();
-        //        that.viewWindow.refMarkerList();
-        //    }
-        //});
+        var attr = entity.attribute.attr;
+        var coord = mars3d.draw.attr.billboard.getCoordinates(entity);
+        var that = this;
+        sendAjax({
+            url: '/we3dGIS/map/marker/saveMarker.jhtml',
+            data: JSON.stringify({
+                "id": attr.id == "0" ? "" : attr.id,
+                "name": attr.name,
+                "remark": attr.remark,
+                "x": coord[0][0],
+                "y": coord[0][1],
+                "z": coord[0][2]
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: 'post',
+            success: function (data) {
+                entity.attribute.attr.id = data;
+                if (endfun) endfun();
+                that.viewWindow.refMarkerList();
+            }
+       });
 
 
         if (endfun) endfun();

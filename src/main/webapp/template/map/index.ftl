@@ -1,3 +1,4 @@
+<#escape x as x?html>
 <!DOCTYPE html>
 <html class="no-js css-menubar" lang="zh-cn">
 <head>
@@ -52,5 +53,7 @@
     <!--业务代码-->
     <script src="${base}/static/map/js/ex/featureViewer.js"></script>
     <script src="${base}/static/map/js/index.js?time=20181201"></script>
+    <script src="${base}/static/js/server.js"></script>
 </body>
 </html>
+</#escape>

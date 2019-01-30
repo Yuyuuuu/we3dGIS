@@ -9,7 +9,8 @@ function sendAjax(opts) {
 
 
     $.ajax({
-        url: baseUrl + "/" + opts.url,
+       // url: baseUrl + "/" + opts.url,
+    	url:  opts.url,
         type: opts.type || "post",
         dataType: opts.dataType || "json",
         timeout: opts.timeout || 12000,

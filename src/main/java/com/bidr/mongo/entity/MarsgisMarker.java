@@ -2,16 +2,24 @@ package com.bidr.mongo.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection="marsgisMarker")
 public class MarsgisMarker {
-	@Id
+	@Field
 	private String id;
+	@Field
 	private String name;
+	@Field
 	private String remark;
+	@Field
 	private double x;
+	@Field
 	private double y;
+	@Field
 	private double z;
+	@Field
 	private String username;
+	
 	public String getId() {
 		return id;
 	}

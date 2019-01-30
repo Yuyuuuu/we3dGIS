@@ -5,6 +5,7 @@ var rightFrame;
 
 $(document).ready(function () {
     initView();
+    
 });
 
 function initView() {
