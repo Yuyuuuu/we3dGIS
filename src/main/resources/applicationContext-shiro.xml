@@ -24,6 +24,7 @@
 				<entry key="/" value="anon" />
 				<entry key="/static/**" value="anon" />
 				<entry key="/websocket/**" value="anon" />
+				<entry key="/map/**" value="anon" />
 				<entry key="/login/index.jhtml" value="authc" />
 				<entry key="/logout/index.jhtml" value="logout" />
 
