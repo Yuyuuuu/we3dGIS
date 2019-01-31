@@ -291,6 +291,7 @@ var addmarkerWidget = mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         if (laststorage != null && laststorage != 'null') {
             this.jsonToLayer(laststorage, true);
         }
+        console.log(laststorage);
 
 
         //读取服务端存储
@@ -299,7 +300,9 @@ var addmarkerWidget = mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
             url: '/we3dGIS/map/marker/queryAll.jhtml',
             type: 'get',
             success: function (arr) {
-            	console.log("服务器查询数据"+arr);
+            	console.log("服务器查询数据"+JSON.stringify(arr));
+            	that.jsonToLayer(JSON.stringify(arr), true);
+            	
             }
         });
 

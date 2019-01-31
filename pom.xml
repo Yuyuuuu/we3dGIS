@@ -246,7 +246,7 @@
 		</dependency>
 		<!--mongoDB -->
 		<!-- mongodb开始 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.4.3</version>
@@ -255,7 +255,19 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-mongodb</artifactId>
 			<version>1.8.2.RELEASE</version>
-		</dependency>
+		</dependency> -->
+		<!--MongoBD-Spring整合-->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.14.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.4.2.RELEASE</version>
+        </dependency>
+		
 		<!-- mongodb结束 -->
 		<!--集成GEOJSON -->
 		<dependency>

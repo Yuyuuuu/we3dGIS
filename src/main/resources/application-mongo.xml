@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-          xmlns:context="http://www.springframework.org/schema/context" 
-          xmlns:mongo="http://www.springframework.org/schema/data/mongo" 
-          xsi:schemaLocation="http://www.springframework.org/schema/context
-          http://www.springframework.org/schema/context/spring-context.xsd
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="
           http://www.springframework.org/schema/data/mongo
-          http://www.springframework.org/schema/data/mongo/spring-mongo-2.0.xsd
-          http://www.springframework.org/schema/data/repository
-    	  http://www.springframework.org/schema/data/repository/spring-repository-1.5.xsd
+          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
           http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <mongo:mongo-client host="39.105.124.32" port="27017">
-    	<mongo:client-options connections-per-host="8" threads-allowed-to-block-for-connection-multiplier="4" connect-timeout="1000" socket-keep-alive="false"/>
-    </mongo:mongo-client>
-     <bean id="mongoDbFactory"
-          class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
-        <constructor-arg ref="mongo" />
-        <constructor-arg value="we3dgis" />
-        <!-- <constructor-arg ref="userCredentials" /> -->
-    </bean>
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+    <mongo:mongo replica-set="39.105.124.32:27017">
+ 
+        <mongo:options connections-per-host="8"
+                       threads-allowed-to-block-for-connection-multiplier="4"
+                       connect-timeout="1000"
+                       max-wait-time="1500"
+                       auto-connect-retry="true"
+                       socket-keep-alive="true"
+                       socket-timeout="1500"
+                       slave-ok="true"
+                       write-number="1"
+                       write-timeout="0"
+                       write-fsync="true"
+        />
+    </mongo:mongo>
+    <mongo:db-factory  dbname="we3dgis" mongo-ref="mongo"/>
+ 
     <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
     </bean>
-  
-
 </beans>

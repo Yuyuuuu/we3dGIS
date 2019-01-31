@@ -272,36 +272,42 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
         var laststorage = haoutil.storage.get(this.storageName); //读取localStorage值  
         if (laststorage == null || laststorage == 'null') {
             //实际系统时可以注释下面代码，该代码是加载演示数据
-            $.getJSON("../data/geojson/plot.json", function (result) {
+        /**    $.getJSON("../static/data/geojson/plot.json", function (result) {
                 if (!that.isActivate) return;
                 that.jsonToLayer(result, true, true);
-            });
+            });**/
         } else {
             that.jsonToLayer(JSON.parse(laststorage), true, true);
         }
 
         //读取服务端存储
-        //sendAjax({
-        //    url: '/kjAirspace/getAll',
-        //    type: 'get',
-        //    success: function (arr) { 
-        //        var arrjson = [];
-        //        for (var i = 0; i < arr.length; i++) {
-        //            var item = arr[i];
-        //            var json = {
-        //                type: "Feature",
-        //                properties: JSON.parse(item.properties),
-        //                geometry: JSON.parse(item.coordinates)
-        //            };
-        //            json.properties.attr.id = item.id;
-        //            json.properties.attr.name = item.name;
-        //            json.properties.attr.remark = item.remark;
+        sendAjax({
+            url: '/we3dGIS/map/plot/queryAll.jhtml',
+            type: 'get',
+            dataType:'json',
+            contentType:'application/json',
+            success: function (arr) { 
+                var arrjson = [];
+                //arr=JSON.stringify(arr);
+                var features=arr.features;
+                console.log("arr========"+arr);
+                console.log("features=========="+JSON.stringify(features));
+              /*  for (var i = 0; i < features.length; i++) {
+                    var item = JSON.stringify(features[i]);
+                    var json = {
+                        type: "Feature",
+                        properties: JSON.parse(item.properties),
+                        geometry: JSON.parse(item.coordinates)
+                    };
+                    json.properties.attr.id = item.id;
+                    json.properties.attr.name = item.name;
+                    json.properties.attr.remark = item.remark;
 
-        //            arrjson.push(json);
-        //        }
-        //        that.drawControl.jsonToEntity({ type: "FeatureCollection", features: arrjson }, true, false);
-        //    }
-        //});
+                    arrjson.push(json);
+                }*/
+                that.drawControl.jsonToEntity({ type: "FeatureCollection", features: features }, true, false);
+            }
+        });
 
     },
     saveEntity: function (entity) {

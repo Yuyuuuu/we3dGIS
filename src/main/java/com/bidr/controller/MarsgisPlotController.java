@@ -1,23 +1,15 @@
 package com.bidr.controller;
-
-import java.util.List;
-
-import org.geojson.FeatureCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.geo.GeoJson;
-import org.springframework.data.mongodb.core.geo.GeoJsonGeometryCollection;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.bidr.mongo.entity.MarsgisMarker;
 import com.bidr.mongo.entity.MarsgisPlot;
 import com.bidr.service.impl.AdminServiceImpl;
@@ -64,16 +56,18 @@ public class MarsgisPlotController {
 	}
 
 	/**
-	 * 查询全部标记
+	 * 查询当前用户标会数据
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/queryAll", method = RequestMethod.GET, produces = "application/json;chartset=UTF-8")
-	public @ResponseBody JSONArray queryAllPlot() {
+	@RequestMapping(value = "/queryAll", method = RequestMethod.GET)
+	public @ResponseBody JSONObject queryAll() {
 		String username = adminService.getCurrentUsername();
-		Query query = new Query(Criteria.where("username").is(username));
-		List<MarsgisMarker> marsgisMarkers = mongoTemplate.find(query, MarsgisMarker.class);
-		return (JSONArray) JSONArray.toJSON(marsgisMarkers);
+		MarsgisPlot marsgisPlot = mongoTemplate.findById(username, MarsgisPlot.class);
+		JSONObject result=new JSONObject();
+		result.put("code", 0);
+		result.put("data", (JSONObject)JSONObject.toJSON(marsgisPlot));
+		return result;
 	}
 
 	/**

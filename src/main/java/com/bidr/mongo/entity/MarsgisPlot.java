@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class MarsgisPlot extends FeatureCollection{
 	@Id
 	private String username;
-
+	
 	public String getUsername() {
 		return username;
 	}

@@ -88,11 +88,14 @@ public class MarsgisMarkerController {
 	 * @return
 	 */
 	@RequestMapping(value="/queryAll",method = RequestMethod.GET,produces = "application/json;chartset=UTF-8")
-	public @ResponseBody JSONArray queryAllMarker(){
+	public @ResponseBody JSONObject queryAllMarker(){
 		String username=adminService.getCurrentUsername();
 		Query query=new Query(Criteria.where("username").is(username));
 		List<MarsgisMarker> marsgisMarkers=mongoTemplate.find(query, MarsgisMarker.class);
-		return (JSONArray)JSONArray.toJSON(marsgisMarkers);
+		JSONObject result=new JSONObject();
+		result.put("code", 0);
+		result.put("data", (JSONArray)JSONArray.toJSON(marsgisMarkers));
+		return result;
 	}
 	/**
 	 * 根据ID删除标记

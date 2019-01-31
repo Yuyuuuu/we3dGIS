@@ -32,9 +32,9 @@ function sendAjax(opts) {
             console.log('返回结果：\n' + JSON.stringify(result)); //日志
 
             if (result && result.code !== 0) {
-                if (result.code == 401 && window.top) {
+               /* if (result.code == 401 && window.top) {
                     top.location.href = "/login.html";
-                }
+                }*/
                 haoutil.msg(result.msg);
 
                 if (opts.error) {
