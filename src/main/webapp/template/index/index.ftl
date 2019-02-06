@@ -36,7 +36,12 @@
             <p href="#" class="fa fa-user-circle-o fa-2x"></p>
             <dl>
                 <dt><span id="lblUserName"><@shiro.principal /></span></dt>
-                <!--<dd><i class="fa fa-comments-o"></i><a href="#">我的消息</a></dd>-->
+                <@shiro.hasPermission name = "admin:user">
+                	<dd><i class="fa fa-comments-o"></i><a href="${base}/admin/index.jhtml"  target="_blank">用户管理</a></dd>
+                </@shiro.hasPermission>
+                <@shiro.hasPermission name = "admin:role">
+                	<dd><i class="fa fa-comments-o"></i><a href="${base}/role/index.jhtml"  target="_blank">角色管理</a></dd>
+                </@shiro.hasPermission>
                 <dd ><a href="${base}/logout/index.jhtml">退出</a><i class="fa fa-sign-out"></i></dd>
                 <!--<dd><i class="fa fa-lock"></i><a href="#">锁屏</a></dd>-->
             </dl>
@@ -76,75 +81,7 @@
 </body>
 </html> 
 <script>
-	$(function(){
-		<#function objectToJsonFunction object>
-		    <#if object??>
-		        <#if object?is_enumerable>
-		            <#local json = '['>
-		            <#list object as item>
-		                <#if item?is_hash> 
-		                    <#if item_index &gt; 0 && json != "[" >
-		                        <#local json = json +',' >
-		                    </#if>
-		                    <#local json = json + objectToJsonFunction(item)>
-		                </#if>
-		            </#list>
-		            <#return json + ']'>
-		        <#elseif object?is_hash>
-		            <#local json = "{">
-		            <#assign keys = object?keys>
-		            <#list keys as key>
-		                <#if object[key]?? && !(object[key]?is_method) && key != "class">
-		                    <#if object[key]?is_number>
-		                        <#if key_index &gt; 0 && json != "{" >
-		                            <#local json = json +',' >
-		                        </#if>
-		                        <#local json = json + '"${key}": ${object[key]}'>
-		                    <#elseif object[key]?is_string>
-		                        <#if key_index &gt; 0 && json != "{" >
-		                            <#local json = json +',' >
-		                        </#if>
-		                      <#local json = json + '"${key}": "${object[key]?html!""?js_string}"'>
-		                    <#elseif object[key]?is_boolean >
-		                        <#if key_index &gt; 0 && json != "{" >
-		                            <#local json = json +',' >
-		                        </#if>
-		                        <#local json = json + '"${key}": ${object[key]?string("true", "false")}'>
-		
-		
-		                    <#elseif object[key]?is_enumerable >
-		                        <#if key_index &gt; 0 && json != "{" >
-		                            <#local json = json +',' >
-		                        </#if>
-		                        <#local json = json + '"${key}":'+ objectToJsonFunction(object[key])>
-		
-		
-		                    <#elseif object[key]?is_hash>
-		                        <#if key_index &gt; 0 && json != "{" >
-		                            <#local json = json +',' >
-		                        </#if>
-		                        <#local json = json + '"${key}":'+ objectToJsonFunction(object[key])>
-		                    </#if>
-		                </#if>
-		            </#list>
-		            <#return json +"}">
-		        </#if>
-		    <#else>
-		        <#return "{}">
-		    </#if>
-		</#function>
-		//获取我的标记数据，并放入浏览器缓存
-	//	 var markers='${objectToJsonFunction(marsgis_addmarker)}'.replaceAll('&quot;','"');
-      //   haoutil.storage.add("marsgis_addmarker", markers);
-         //监听浏览器本地缓存数据变化
-        //  window.addEventListener("storage",function(e){
-         //	  if(e.key=="marsgis_addmarker"){//添加标记
-         	//  		console.log(e.value);
-         	 // }else if(e.key=="marsgis_plot"){
-         	  	//	console.log(e.value);
-         	  //}
-         //},true);
-	})
+ 
 </script>
 </body>
 </html>

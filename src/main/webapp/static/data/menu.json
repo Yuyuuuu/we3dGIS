@@ -9,10 +9,12 @@
         {
             "name": "信息展示",
             "icon": "fa fa-eye",
+            "permission":"info",
             "children": [
                 {
                     "name": "企业点",
                     "icon": "fa fa-university",
+                    "permission":"qy",
                     "children": [
                         {
                             "name": "企业分布",
@@ -28,6 +30,7 @@
                 {
                     "name": "动态数据",
                     "icon": "fa fa-ship",
+                    "permission":"data",
                     "children": [
                         {
                             "name": "飞行编队",
@@ -46,10 +49,12 @@
         {
             "name": "三维模型",
             "icon": "fa fa-building",
+            "permission":"model",
             "children": [
                 {
                     "name": "城市建筑",
                     "icon": "fa fa-folder-o",
+                    "permission":"city",
                     "children": [
                         {
                             "name": "合肥市区",
@@ -66,6 +71,7 @@
                 {
                     "name": "人工模型",
                     "icon": "fa fa-folder-o",
+                    "permission":"manModel",
                     "children": [
                         {
                             "name": "化工厂",
@@ -89,6 +95,7 @@
                 {
                     "name": "倾斜摄影",
                     "icon": "fa fa-folder-o",
+                    "permission":"photo",
                     "children": [
                         {
                             "name": "厂房",
@@ -117,6 +124,7 @@
                 {
                     "name": "管网",
                     "icon": "fa fa-random",
+                    "permission":"pipe",
                     "children": [
                         {
                             "name": "矢量管网",
@@ -134,10 +142,12 @@
         {
             "name": "数据分析",
             "icon": "fa fa-area-chart",
+            "permission":"analyse",
             "children": [
                 {
                     "name": "综合分析",
                     "icon": "fa fa-folder-o",
+                    "permission":"zh",
                     "children": [
                         {
                             "name": "事故模拟",
@@ -160,6 +170,7 @@
                 {
                     "name": "专项数据",
                     "icon": "fa fa-folder-o",
+                    "permission":"zx",
                     "children": [
                         {
                             "name": "含水层",
@@ -196,6 +207,7 @@
         {
             "name": "综合态势",
             "icon": "fa fa-magic",
+            "permission":"situation",
             "children": [
                 {
                     "name": "热力图",

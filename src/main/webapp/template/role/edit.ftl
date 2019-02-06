@@ -30,44 +30,37 @@
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
-		    <label class="layui-form-label">监测数据</label>
+		    <label class="layui-form-label">信息展示</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("monitor:data")> checked="checked" </#if>  name="monitor:data" value="monitor:data" lay-filter="authorities" title="监测数据管理">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("monitor:file")> checked="checked" </#if>  name="monitor:file" value="monitor:file" lay-filter="authorities" title="监测文件管理">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("monitor:view")> checked="checked" </#if>  name="monitor:view" value="monitor:view" lay-filter="authorities" title="监测其他材料">
-		    </div>
-		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">地质数据</label>
-		    <div class="layui-input-block">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("geology:data")> checked="checked" </#if>  name="geology:data" value="geology:data" lay-filter="authorities" title="地质数据录入">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("geology:file")> checked="checked" </#if>  name="geology:file" value="geology:file" lay-filter="authorities" title="地质文件管理">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("geology:view")> checked="checked" </#if>  name="geology:view" value="geology:view" lay-filter="authorities" title="地质文件预览">
-		    </div>
-		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">施工进度管理</label>
-		    <div class="layui-input-block">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("progress:data")> checked="checked" </#if>  name="progress:data" value="progress:data" lay-filter="authorities" title="监测数据管理">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("progress:file")> checked="checked" </#if>  name="progress:file" value="progress:file" lay-filter="authorities" title="监测文件管理">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("progress:view")> checked="checked" </#if>  name="progress:view" value="progress:view" lay-filter="authorities" title="监测其他材料">
-		    </div>
-		  </div>
-		   <div class="layui-form-item">
-		    <label class="layui-form-label">设计文件</label>
-		    <div class="layui-input-block">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("design:file")> checked="checked" </#if>  name="design:file" value="design:file" lay-filter="authorities" title="文件管理">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("design:view")> checked="checked" </#if>  name="design:view" value="design:view" lay-filter="authorities" title="文件查看">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("info:qy")> checked="checked" </#if>  name="info:qy" value="info:qy" lay-filter="authorities" title="企业点">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("info:data")> checked="checked" </#if>  name="info:data" value="info:data" lay-filter="authorities" title="动态数据">
 		      
 		    </div>
 		  </div>
-		   <div class="layui-form-item">
-		    <label class="layui-form-label">现场照片</label>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">三维模型</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("photo:upload")> checked="checked" </#if>  name="photo:upload" value="photo:upload" lay-filter="authorities" title="照片上传">
-		      <input type="checkbox" <#if role.authoritieList?seq_contains("photo:view")> checked="checked" </#if>  name="photo:view" value="photo:view" lay-filter="authorities" title="照片查看">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("model:city")> checked="checked" </#if>  name="model:city" value="model:city" lay-filter="authorities" title="城市建筑">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("model:manMolde")> checked="checked" </#if>  name="model:manMolde" value="model:manMolde" lay-filter="authorities" title="人工模型">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("model:photo")> checked="checked" </#if>  name="model:photo" value="model:photo" lay-filter="authorities" title="倾斜摄影">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("model:pipe")> checked="checked" </#if>  name="model:pipe" value="model:pipe" lay-filter="authorities" title="管网">
 		    </div>
 		  </div>
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">数据分析</label>
+		    <div class="layui-input-block">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("analyse:zh")> checked="checked" </#if>  name="analyse:zh" value="analyse:zh" lay-filter="authorities" title="综合分析">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("analyse:zx")> checked="checked" </#if>  name="analyse:zx" value="analyse:zx" lay-filter="authorities" title="专项分析">
+		    </div>
+		  </div>
+		   <div class="layui-form-item">
+		    <label class="layui-form-label">综合态势</label>
+		    <div class="layui-input-block">
+		      <input type="checkbox" <#if role.authoritieList?seq_contains("situation:zh")> checked="checked" </#if>  name="situation:zh" value="situation:zh" lay-filter="authorities" title="综合态势">
+		      
+		    </div>
+		  </div>
+		 
 		   <div class="layui-form-item">
 		    <div class="layui-input-block">
 		      <button class="layui-btn" lay-submit="" lay-filter="submitRoleForm">立即提交</button>
@@ -119,10 +112,7 @@
 	    return false;
 	  });
 	  //表单初始赋值
-	  form.val('editRole', {
-	    "name": ${role.name}
-	    ,"description": ${role.description}
-	  })
+	
 </script>
 </body>
 </html>

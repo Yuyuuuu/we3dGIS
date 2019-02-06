@@ -176,7 +176,14 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     },
     deleteAll: function () {
         this.drawControl.deleteAll();
-
+      //服务器存储
+        sendAjax({
+            url: '/we3dGIS/map/plot/deleteAll.jhtml',
+            type: 'get',
+            success: function () { 
+            	console.log("全部删除成功===");
+            }
+        });
         //本地存储
         haoutil.storage.del(this.storageName);
     },
@@ -189,20 +196,11 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
     deleteCurrentEntity: function () {
         var entity = this.drawControl.getCurrentEntity();
         if (entity == null) return;
-
+        entity.flag="delete";
         this.drawControl.deleteEntity(entity);
-
-        //var that = this;
-        //sendAjax({
-        //    url: 'kjAirspace/del/' + entity._attribute.attr.id,
-        //    type: 'get',
-        //    success: function (id) { 
-        //    }
-        //}); 
-
         //本地存储
-        var storagedata = JSON.stringify(this.getGeoJson());
-        haoutil.storage.add(this.storageName, storagedata);
+       var storagedata = JSON.stringify(this.getGeoJson());
+       haoutil.storage.add(this.storageName, storagedata);
     },
     hasEdit: function (val) {
         this.drawControl.hasEdit(val);
@@ -270,68 +268,76 @@ mars3d.widget.bindClass(mars3d.widget.BaseWidget.extend({
 
         //读取本地存储
         var laststorage = haoutil.storage.get(this.storageName); //读取localStorage值  
+       //console.log("laststorage=========="+JSON.stringify(laststorage));
         if (laststorage == null || laststorage == 'null') {
-            //实际系统时可以注释下面代码，该代码是加载演示数据
-        /**    $.getJSON("../static/data/geojson/plot.json", function (result) {
-                if (!that.isActivate) return;
-                that.jsonToLayer(result, true, true);
-            });**/
+       
+   
         } else {
             that.jsonToLayer(JSON.parse(laststorage), true, true);
-        }
+       }
 
         //读取服务端存储
+        
         sendAjax({
             url: '/we3dGIS/map/plot/queryAll.jhtml',
             type: 'get',
             dataType:'json',
             contentType:'application/json',
             success: function (arr) { 
-                var arrjson = [];
-                //arr=JSON.stringify(arr);
+               /* var arrjson = [];
                 var features=arr.features;
-                console.log("arr========"+arr);
-                console.log("features=========="+JSON.stringify(features));
-              /*  for (var i = 0; i < features.length; i++) {
+                console.log(features.length);
+                for (var i = 0; i < features.length; i++) {
                     var item = JSON.stringify(features[i]);
+                    console.log(item);
                     var json = {
                         type: "Feature",
                         properties: JSON.parse(item.properties),
-                        geometry: JSON.parse(item.coordinates)
+                        geometry: JSON.parse(item.geometry.coordinates)
                     };
                     json.properties.attr.id = item.id;
                     json.properties.attr.name = item.name;
                     json.properties.attr.remark = item.remark;
 
                     arrjson.push(json);
-                }*/
-                that.drawControl.jsonToEntity({ type: "FeatureCollection", features: features }, true, false);
+                }
+                that.drawControl.jsonToEntity({ type: "FeatureCollection", features: arrjson }, true, false);*/
+            	that.drawControl.jsonToEntity(arr, true, false);
             }
         });
+        
 
     },
     saveEntity: function (entity) {
-        entity._attribute.attr = entity._attribute.attr || {};
-        entity._attribute.attr.id = (new Date()).format("yyyyMMddHHmmss");
-
-
-        //本地存储
-        var storagedata = JSON.stringify(this.getGeoJson());
-        haoutil.storage.add(this.storageName, storagedata);
-
-
-        //服务端存储
-        var json = this.drawControl.toGeoJSON(entity); 
-        sendAjax({
-            url: '/we3dGIS/map/plot/savePlot.jhtml',
-            data: JSON.stringify(this.getGeoJson()),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: 'post',
-           success: function (data) {
-                entity._attribute.attr.id = data;
-            }
-        });
+    	if(("flag" in entity)){
+       	 sendAjax({
+                url: '/we3dGIS/map/plot/delete/' + entity._attribute.attr.id+".jhtml",
+                type: 'get',
+                success: function (id) { 
+                }
+            }); 
+       }else{
+    	   entity._attribute.attr = entity._attribute.attr || {};
+           entity._attribute.attr.id = (new Date()).format("yyyyMMddHHmmss");
+           //本地存储
+           var storagedata = JSON.stringify(this.getGeoJson());
+           haoutil.storage.add(this.storageName, storagedata);
+           console.log(storagedata);
+           //服务端存储
+           var json = this.drawControl.toGeoJSON(entity); 
+           sendAjax({
+               url: '/we3dGIS/map/plot/savePlot.jhtml',
+               data: {marsgisPlot:storagedata},
+              // contentType: "application/json; charset=utf-8",
+               dataType: "json",
+               type: 'post',
+              success: function (data) {
+                   entity._attribute.attr.id = data;
+               }
+           });
+    	   
+       }
+        
 
     },
 

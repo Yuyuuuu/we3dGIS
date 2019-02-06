@@ -50,8 +50,8 @@ function initView() {
             $('#navLoadEle').hide(); // loading
 
             defpage = json.defpage;
-            //showPage(defpage);
-
+            var menu=json.menu;
+           
             initMenu(json, clkMenuNodeItem);
         },
         error: function (d) {

@@ -16,7 +16,7 @@
                        max-wait-time="1500"
                        auto-connect-retry="true"
                        socket-keep-alive="true"
-                       socket-timeout="1500"
+                       socket-timeout="150000"
                        slave-ok="true"
                        write-number="1"
                        write-timeout="0"

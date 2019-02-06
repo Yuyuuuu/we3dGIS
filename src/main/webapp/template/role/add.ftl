@@ -28,45 +28,36 @@
 		      <input type="checkbox" name="authorities" value="admin:role" lay-filter="authorities" title="角色管理">
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">监测数据</label>
+		   <div class="layui-form-item">
+		    <label class="layui-form-label">信息展示</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" name="authorities" value="monitor:data" lay-filter="authorities" title="监测数据录入">
-		      <input type="checkbox" name="authorities" value="monitor:file" lay-filter="authorities" title="监测文件管理">
-		      <input type="checkbox" name="authorities" value="monitor:view" lay-filter="authorities" title="监测文件预览">
+		      <input type="checkbox" name="authorities" value="info:qy" lay-filter="authorities" title="企业点">
+		      <input type="checkbox" name="authorities" value="info:data" lay-filter="authorities" title="动态数据">
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">地质数据</label>
+		   <div class="layui-form-item">
+		    <label class="layui-form-label">三维模型</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" name="authorities" value="geology:data" lay-filter="authorities" title="地质数据录入">
-		      <input type="checkbox" name="authorities" value="geology:file" lay-filter="authorities" title="地质文件管理">
-		      <input type="checkbox" name="authorities" value="geology:view" lay-filter="authorities" title="地质文件预览">
+		      <input type="checkbox" name="authorities" value="model:city" lay-filter="authorities" title="城市建筑">
+		      <input type="checkbox" name="authorities" value="model:manMolde" lay-filter="authorities" title="人工模型">
+		      <input type="checkbox" name="authorities" value="model:photo" lay-filter="authorities" title="倾斜摄影">
+		      <input type="checkbox" name="authorities" value="model:pipe" lay-filter="authorities" title="管网">
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-		    <label class="layui-form-label">施工进度管理</label>
+		   <div class="layui-form-item">
+		    <label class="layui-form-label">数据分析</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" name="authorities" value="progress:data" lay-filter="authorities" title="施工数据录入">
-		      <input type="checkbox" name="authorities" value="progress:file" lay-filter="authorities" title="施工文件管理">
-		      <input type="checkbox" name="authorities" value="progress:view" lay-filter="authorities" title="施工文件预览">
+		      <input type="checkbox" name="authorities" value="analyse:zh" lay-filter="authorities" title="综合分析">
+		      <input type="checkbox" name="authorities" value="analyse:zx" lay-filter="authorities" title="专项数据">
 		    </div>
 		  </div>
-		
-		    <div class="layui-form-item">
-		    <label class="layui-form-label">设计文件</label>
+		   <div class="layui-form-item">
+		    <label class="layui-form-label">综合态势</label>
 		    <div class="layui-input-block">
-		      <input type="checkbox" name="authorities" value="design:file" lay-filter="authorities" title="文件管理">
-		      <input type="checkbox" name="authorities" value="design:view" lay-filter="authorities" title="文件查看">
+		      <input type="checkbox" name="authorities" value="situation:zh" lay-filter="authorities" title="综合态势">
 		    </div>
 		  </div>
-		    <div class="layui-form-item">
-		    <label class="layui-form-label">现场照片</label>
-		    <div class="layui-input-block">
-		      <input type="checkbox" name="authorities" value="photo:upload" lay-filter="authorities" title="照片上传">
-		      <input type="checkbox" name="authorities" value="photo:view" lay-filter="authorities" title="照片查看">
-		    </div>
-		  </div>
+		 
 		
 		  
 		   <div class="layui-form-item">
